@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Vote Counts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #imageContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-item {
+            margin: 10px;
+        }
+
+        .image-item img {
+            width: 200px;
+            height: auto;
+            border: 2px solid #333;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #voteCount {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>How does this song make you feel?</h1>
+    
+    <div id="imageContainer">
+        <div class="image-item">
+            <img src="Calm_emoji.jpg" id="Calm">
+        </div>
+        <div class="image-item">
+            <img src="angry_symbol.jpg" id="Angry">
+        </div>
+        <div class="image-item">
+            <img src="hope_symbol.jpg" id="Hopeful">
+        </div>
+        <div class="image-item">
+            <img src="passionate_symbol.jpg" id="Passionate">
+        </div>
+        <div class="image-item">
+            <img src="scared_symbol.jpg" id="Scared">
+        </div>
+        <div class="image-item">
+            <img src="happy_symbol.jpg" id="Happy">
+        </div>
+    </div>
+    
+    <p>Click on a picture to vote for it:</p>
+    
+    <div id="voteCount">
+        <!-- Vote count will be displayed here -->
+    </div>
+
+    <script>
+        const images = document.querySelectorAll("img");
+        const voteCount = {};
+
+        images.forEach(image => {
+            image.addEventListener("click", function() {
+                const imageId = this.id;
+                if (voteCount[imageId]) {
+                    voteCount[imageId]++;
+                } else {
+                    voteCount[imageId] = 1;
+                }
+                updateVoteCount();
+            });
+        });
+
+        function updateVoteCount() {
+            const voteCountElement = document.getElementById("voteCount");
+            voteCountElement.innerHTML = "Vote count:<br>";
+            for (const imageId in voteCount) {
+                voteCountElement.innerHTML += `${imageId}: ${voteCount[imageId]}<br>`;
+            }
+
+            // Find the image with the most votes
+            let mostVotedImage = Object.keys(voteCount)[0];
+            for (const imageId in voteCount) {
+                if (voteCount[imageId] > voteCount[mostVotedImage]) {
+                    mostVotedImage = imageId;
+                }
+            }
+            
+            voteCountElement.innerHTML += `<br>Most Voted: ${mostVotedImage}`;
+        }
+    </script>
+</body>
+</html>
