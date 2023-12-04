@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Vote Counts</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: black;
+            color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
         }
 
         h1 {
-            color: #333;
+            color: #fff;
         }
 
         #imageContainer {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             justify-content: center;
             align-items: center;
+            margin-top: 20px;
         }
 
         .image-item {
             margin: 10px;
+            position: relative;
         }
 
         .image-item img {
@@ -34,11 +40,23 @@
             cursor: pointer;
         }
 
+        .image-divider {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: blue;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
         #voteCount {
-            background-color: #fff;
+            background-color: black; /* Change the background color to black */
+            color: yellow; /* Change the text color to yellow */
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -47,22 +65,28 @@
     
     <div id="imageContainer">
         <div class="image-item">
-            <img src="calm_emoji.jpg" id="Calm">
+            <img src="Calm_emoji.jpg" id="Calm" alt="Calm">
+            <div class="image-divider"></div>
         </div>
         <div class="image-item">
-            <img src="angry_symbol.jpg" id="Angry">
+            <img src="angry_symbol.jpg" id="Angry" alt="Angry">
+            <div class="image-divider"></div>
         </div>
         <div class="image-item">
-            <img src="hope_symbol.jpg" id="Hopeful">
+            <img src="hope_symbol.jpg" id="Hopeful" alt="Hopeful">
+            <div class="image-divider"></div>
         </div>
         <div class="image-item">
-            <img src="passionate_symbol.jpg" id="Passionate">
+            <img src="passionate_symbol.jpg" id="Passionate" alt="Passionate">
+            <div class="image-divider"></div>
         </div>
         <div class="image-item">
-            <img src="scared_symbol.jpg" id="Scared">
+            <img src="scared_symbol.jpg" id="Scared" alt="Scared">
+            <div class="image-divider"></div>
         </div>
         <div class="image-item">
-            <img src="happy_symbol.jpg" id="Happy">
+            <img src="happy_symbol.jpg" id="Happy" alt="Happy">
+            <div class="image-divider"></div>
         </div>
     </div>
     
