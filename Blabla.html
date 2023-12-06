@@ -108,28 +108,51 @@
     </div>
 
     <script>
+        // Check if the user has already voted using local storage
+        const hasVoted = localStorage.getItem("hasVoted");
+        if (hasVoted) {
+            disableVoting();
+        }
+    
         const images = document.querySelectorAll("img");
-        const voteCount = {};
-
+        let voteCount = {};
+    
         images.forEach(image => {
             image.addEventListener("click", function() {
+                // Check if the user has already voted
+                if (hasVoted) {
+                    alert("You have already voted. Thank you!");
+                    return;
+                }
+    
                 const imageId = this.id;
                 if (voteCount[imageId]) {
                     voteCount[imageId]++;
                 } else {
                     voteCount[imageId] = 1;
                 }
+    
+                // Update local storage to indicate that the user has voted
+                localStorage.setItem("hasVoted", true);
+    
                 updateVoteCount();
             });
         });
-
+    
+        function disableVoting() {
+            // Disable voting by removing click event listeners from images
+            images.forEach(image => {
+                image.removeEventListener("click", function() {});
+            });
+        }
+    
         function updateVoteCount() {
             const voteCountElement = document.getElementById("voteCount");
             voteCountElement.innerHTML = "Vote count:<br>";
             for (const imageId in voteCount) {
                 voteCountElement.innerHTML += `${imageId}: ${voteCount[imageId]}<br>`;
             }
-
+    
             // Find the image with the most votes
             let mostVotedImage = Object.keys(voteCount)[0];
             for (const imageId in voteCount) {
@@ -140,6 +163,22 @@
             
             voteCountElement.innerHTML += `<br>Most Voted: ${mostVotedImage}`;
         }
+    
+        function resetVotes() {
+            const confirmReset = confirm("Are you sure you want to reset the vote count?");
+            
+            if (confirmReset) {
+                // Reset vote count and remove the "hasVoted" flag
+                localStorage.removeItem("hasVoted");
+                voteCount = {};
+                updateVoteCount();
+                alert("Vote count has been reset.");
+            }
+        }
     </script>
+    
+    <!-- Add this button where you want it on your page -->
+    <button onclick="resetVotes()">Reset Votes</button>
+    
 </body>
 </html>
